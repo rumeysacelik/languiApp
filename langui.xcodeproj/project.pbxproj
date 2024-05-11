@@ -17,7 +17,6 @@
 		046CE1D22BDFB24100356A6B /* languiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046CE1D12BDFB24100356A6B /* languiUITestsLaunchTests.swift */; };
 		046CE1DF2BDFC0B700356A6B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 046CE1DE2BDFC0B700356A6B /* Media.xcassets */; };
 		046CE1E32BDFC0F900356A6B /* db_books.csv in Resources */ = {isa = PBXBuildFile; fileRef = 046CE1E22BDFC0F900356A6B /* db_books.csv */; };
-		046CE1E52BDFCA8300356A6B /* sto.csv in Resources */ = {isa = PBXBuildFile; fileRef = 046CE1E42BDFCA8300356A6B /* sto.csv */; };
 		04A33D0F2BE25F4A00116254 /* LevelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A33D0E2BE25F4A00116254 /* LevelListView.swift */; };
 		04A33D112BE25FA000116254 /* LevelDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A33D102BE25FA000116254 /* LevelDetailView.swift */; };
 		04A33D132BE2602900116254 /* StoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A33D122BE2602900116254 /* StoryListView.swift */; };
@@ -66,7 +65,6 @@
 		046CE1D12BDFB24100356A6B /* languiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = languiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		046CE1DE2BDFC0B700356A6B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		046CE1E22BDFC0F900356A6B /* db_books.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = db_books.csv; path = ../../../Downloads/archive/db_books.csv; sourceTree = "<group>"; };
-		046CE1E42BDFCA8300356A6B /* sto.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sto.csv; path = ../../../Downloads/sto.csv; sourceTree = "<group>"; };
 		04A33D0E2BE25F4A00116254 /* LevelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListView.swift; sourceTree = "<group>"; };
 		04A33D102BE25FA000116254 /* LevelDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDetailView.swift; sourceTree = "<group>"; };
 		04A33D122BE2602900116254 /* StoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListView.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 				04A33D0D2BE25F0100116254 /* Views */,
 				04C871102BE186410086A893 /* GoogleService-Info.plist */,
 				046CE1E22BDFC0F900356A6B /* db_books.csv */,
-				046CE1E42BDFCA8300356A6B /* sto.csv */,
 				046CE1B42BDFB23F00356A6B /* languiApp.swift */,
 				046CE1B82BDFB24000356A6B /* Assets.xcassets */,
 				046CE1BA2BDFB24000356A6B /* Preview Content */,
@@ -323,7 +320,6 @@
 				046CE1BC2BDFB24000356A6B /* Preview Assets.xcassets in Resources */,
 				046CE1DF2BDFC0B700356A6B /* Media.xcassets in Resources */,
 				046CE1E32BDFC0F900356A6B /* db_books.csv in Resources */,
-				046CE1E52BDFCA8300356A6B /* sto.csv in Resources */,
 				046CE1B92BDFB24000356A6B /* Assets.xcassets in Resources */,
 				04C871112BE186410086A893 /* GoogleService-Info.plist in Resources */,
 			);

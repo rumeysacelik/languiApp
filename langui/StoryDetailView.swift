@@ -16,64 +16,93 @@ struct StoryDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                Text(story.title)
-                    .font(.title)
-                    .padding(.bottom, 10)
-                    .multilineTextAlignment(.center)
-                    .onAppear {
-                        translateWord(story.title)
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text(story.title)
+                        .font(.title)
+                        .padding(.bottom, 10)
+                        .multilineTextAlignment(.center)
+                        .onAppear {
+                            translateWord(story.title)
+                        }
+
+                    if !story.content.isEmpty {
+                        Text("Content:")
+                            .font(.headline)
+                        contentWithTranslatedWords()
                     }
 
-                if !story.content.isEmpty {
-                    Text("Content:")
-                        .font(.headline)
-                    contentWithTranslatedWords()
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    }
                 }
-
-                if isLoading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.1)) // Background color for better visibility
-            .cornerRadius(10) // Rounded corners for aesthetics
-            .padding() // Add padding to the whole VStack
-            .popover(isPresented: $isPopoverPresented) {
-                if let translatedWord = translatedWord {
-                    Text("Türkçe Karşılığı: \(translatedWord)")
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+                .padding()
+                .background(Color.gray.opacity(0.1)) // Background color for better visibility
+                .cornerRadius(10) // Rounded corners for aesthetics
+                .padding() // Add padding to the whole VStack
+                .popover(isPresented: $isPopoverPresented) {
+                    if let translatedWord = translatedWord {
+                        Text("Türkçe Karşılığı: \(translatedWord)")
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                    }
                 }
             }
+            .navigationBarTitle("Story Detail")
         }
-        .navigationBarTitle("Story Detail")
     }
-
+    
+    
     @ViewBuilder
     private func contentWithTranslatedWords() -> some View {
-        let paragraphs = story.content.components(separatedBy: .newlines)
-        ForEach(0..<paragraphs.count, id: \.self) { index in
-            let words = paragraphs[index].components(separatedBy: .whitespacesAndNewlines)
-            VStack(alignment: .leading, spacing: 5) {
-                ForEach(words, id: \.self) { word in
-                    Text(word)
-                        .font(.body)
-                        .multilineTextAlignment(.leading)
-                        .onTapGesture {
-                            selectedWord = word
-                            translateWord(word)
-                            isPopoverPresented = true
-                        }
+       
+        VStack {
+            ForEach(splitTextIntoChunks(text: story.content, chunkSize: 6), id: \.self) { chunk in
+                
+                HStack {
+                ForEach(chunk,id:\.self) { word in
+                    
+                        Text(word)
+                            .font(.body)
+                            .multilineTextAlignment(.leading)
+                            .onTapGesture {
+                                selectedWord = word
+                                translateWord(word)
+                                isPopoverPresented = true
+                            }
+                            .tint(.blue)
+                            .fixedSize()
+                    }
                 }
-            }
+        }
         }
     }
+    
+    
+    func splitTextIntoChunks(text: String, chunkSize: Int) -> [[String]] {
+        let words = text.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+        var chunks = [[String]]()
+        var currentChunk = [String]()
 
+        for word in words {
+            currentChunk.append(word)
+            if currentChunk.count == chunkSize {
+                chunks.append(currentChunk)
+                currentChunk = []
+            }
+        }
+
+        if !currentChunk.isEmpty {
+            chunks.append(currentChunk)
+        }
+
+        return chunks
+    }
+    
     func translateWord(_ word: String) {
         let baseURL = "https://api.mymemory.translated.net/get"
         let username = "678c4c92a9a3cf94137f"
@@ -121,4 +150,3 @@ struct StoryDetailView: View {
         task.resume()
     }
 }
-
