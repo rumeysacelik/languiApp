@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import FirebaseAuth
+
+
+class LoginVM : ObservableObject {
+    @Published var user : User?
+    
+    func login(email : String,password : String){
+        
+    }
+}
