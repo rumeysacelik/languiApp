@@ -16,15 +16,24 @@ struct languiApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if delegate.authService?.currentUser != nil {
+                MainTabView()
+            }else {
+                LoginOrRegisterView()
+            }
         }
     }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    private(set) var authService : AuthService?
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
+        
+        authService = AuthService()
         return true
     }
 }

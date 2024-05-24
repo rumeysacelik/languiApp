@@ -9,6 +9,9 @@ import SwiftUI
 
 struct LoginOrRegisterView : View {
     
+    @State var isLoginTouched = false
+    @State var isRegisterTouched = false
+    
     var body: some View {
         VStack {
             
@@ -39,7 +42,7 @@ struct LoginOrRegisterView : View {
                 HStack {
                     Spacer()
                     Button("Register"){
-                        
+                        isRegisterTouched = true
                     }
                     .foregroundStyle(.white)
                     .frame(width: Constants.screenWidth * 0.3,height: 20)
@@ -50,7 +53,7 @@ struct LoginOrRegisterView : View {
                     )
                     Spacer()
                     Button(action: {
-                        
+                        isLoginTouched = true
                     }, label: {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(Color.white)
@@ -73,6 +76,12 @@ struct LoginOrRegisterView : View {
                 .rect(topLeadingRadius: Constants.screenWidth * 0.05,
                       topTrailingRadius: Constants.screenWidth * 0.05))
         }
+        .fullScreenCover(isPresented: $isLoginTouched, content: {
+            LoginView()
+        })
+        .fullScreenCover(isPresented: $isRegisterTouched, content: {
+            RegisterView()
+        })
     }
 }
 

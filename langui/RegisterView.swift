@@ -1,20 +1,21 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  langui
 //
-//  Created by Mehmet Emin Ak on 12.05.2024.
+//  Created by Mehmet Emin Ak on 24.05.2024.
 //
+
 
 import SwiftUI
 
-struct LoginView : View {
+struct RegisterView : View {
     
     @ObservedObject private var authService = AuthService()
     @State var email : String = ""
     @State var password : String = ""
     @State var isPasswordShowing : Bool = false
     @State var isAlertPresented : Bool = false
-    @State var touchedToSignup : Bool = false
+    @State var touchedToSignIn : Bool = false
     @State var alertInfo : AlertInfos?
     func isEmailValid() -> Bool {
         
@@ -114,14 +115,14 @@ struct LoginView : View {
                         alertInfo = AlertInfos(alertTitle: "Hata!".localized(),alertMessage: "Şifreniz en az 6 karakterli olmalıdır".localized())
                             isAlertPresented = true
                     }
-                    authService.signInWithCredentials(email: email, password: password)
+                    authService.signUpWithCredentials(email: email, password: password)
                     
                 }, label: {
                     Capsule()
                         .fill(Color(uiColor: UIColor(hex: Constants.mainColor)))
                         .frame(width: Constants.screenWidth * 0.8,height: 57)
                         .overlay {
-                            Text("Login")
+                            Text("Register")
                                 .foregroundStyle(.white)
                                 .font(.system(size: 20))
             
@@ -131,11 +132,11 @@ struct LoginView : View {
                 
                 HStack {
                     Button(action: {
-                        touchedToSignup = true
+                        touchedToSignIn = true
                     }, label: {
-                        Text("Doesn't have account?")
+                        Text("Do you have account?")
                             .foregroundStyle(.gray)
-                        Text("Register")
+                        Text("Login")
                             .foregroundStyle(Color(uiColor: UIColor(hex: Constants.mainColor)))
                     })
                 }
@@ -150,8 +151,8 @@ struct LoginView : View {
         },set: { _ in }), content: {
             MainTabView()
         })
-        .fullScreenCover(isPresented: $touchedToSignup, content: {
-            RegisterView()
+        .fullScreenCover(isPresented: $touchedToSignIn, content: {
+            LoginView()
         })
         .alert(authService.authErrorMessage ?? "Unknown error occured!",isPresented: Binding<Bool>(get: {
             authService.authErrorMessage != nil
@@ -166,12 +167,7 @@ struct LoginView : View {
     }
 }
 
-struct AlertInfos {
-    var alertTitle : String = "Hata!"
-    var alertMessage : String?
-}
-
 
 #Preview {
-    LoginView()
+    RegisterView()
 }
