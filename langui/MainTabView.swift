@@ -3,6 +3,7 @@ import SwiftUI
 struct MainTabView: View {
     @State private var searchText = ""
     @State private var isKeyboardVisible = false
+    @State private var redirectToLogin = false
     @StateObject private var viewModel = ContentViewModel()
     private let authService = AuthService()
     
@@ -33,11 +34,16 @@ struct MainTabView: View {
             
             Button("Çıkış Yap",action: {
                 authService.signOut()
+                redirectToLogin = true
+                
             }).tabItem {
                 Image(systemName: "person")
                 Text("Profile")
             }
         }
+        .fullScreenCover(isPresented: $redirectToLogin, content: {
+            LoginView()
+        })
     }
 }
 

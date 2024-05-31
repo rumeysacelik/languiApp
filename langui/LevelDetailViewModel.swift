@@ -22,10 +22,11 @@ class LevelDetailViewModel: ObservableObject {
                 let data = document.data()
                 guard let title = data["title"] as? String,
                       let content = data["book"] as? String,
-                      let level = data["level"] as? String else {
-                    return nil
+                      let level = data["level"] as? String,
+                      let author = data["author"] as? String else{
+                    return Story(title: "?", content: "?", level: "?", author: "?")
                 }
-                return Story(title: title, content: content, level: level)
+                return Story(title: title, content: content, level: level,author: author)
             }
         }
     }

@@ -154,10 +154,10 @@ struct LoginView : View {
             RegisterView()
         })
         .alert(authService.authErrorMessage ?? "Unknown error occured!",isPresented: Binding<Bool>(get: {
-            authService.authErrorMessage != nil
+            authService.authErrorMessage != nil && authService.isAlertPresented
         }, set: { _ in }),actions: {
             Button("OK") {
-                
+                authService.isAlertPresented = false
             }
         })
         .onTapGesture {

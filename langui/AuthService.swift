@@ -13,6 +13,7 @@ final class AuthService : ObservableObject {
     
     private let auth = Auth.auth()
     private let validator = Validator()
+    @Published var isAlertPresented = false
     
     @Published private(set) public var currentUser : User?
     @Published var authErrorMessage : String?
@@ -30,9 +31,11 @@ final class AuthService : ObservableObject {
                 
                 if err != nil {
                     authErrorMessage = err!.localizedDescription
+                    isAlertPresented = true
                 }
                 
                 else if let res  {
+                    authErrorMessage = nil
                     currentUser = res.user
                 }
             }
